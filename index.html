@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3億破産ニキ 株式会社  公式サイト</title>
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome (SNSアイコン用) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind カスタム設定 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    },
+                    colors: {
+                        gold: '#d4af37',
+                        dark: '#111111',
+                        navy: '#002b5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 文字詰め設定 */
+        body {
+            font-feature-settings: "palt";
+        }
+
+        /* スクロールアニメーション用クラス */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Instagramアイコンのグラデーション */
+        .text-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ヒーローセクションの縦書きテキスト用 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- 1. ヘッダー構成 (Sticky) -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50 transition-all duration-300" id="header">
+        <div class="max-w-7xl mx-auto pl-4 pr-0 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between items-center h-20">
+                <!-- ロゴエリア -->
+                <div class="flex-1 flex items-center min-w-0 pr-2">
+                    <a href="#" class="flex items-center gap-2 md:gap-3 text-sm sm:text-lg md:text-2xl font-bold text-gray-900 tracking-wider truncate">
+                        <span class="text-blue-900 text-2xl md:text-3xl flex-shrink-0"><i class="fa-solid fa-chart-line"></i></span>
+                        <div class="truncate">
+                            <span class="block text-[10px] md:text-xs text-gray-500 font-sans tracking-normal">参謀顧問サービス</span>
+                            <span class="truncate block">カナメ株式会社</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- デスクトップナビゲーション -->
+                <nav class="hidden lg:flex space-x-8 items-center">
+                    <a href="#service" class="text-gray-700 hover:text-gold px-3 py-2 text-sm font-medium transition whitespace-nowrap">事業内容</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#company" class="text-gray-700 hover:text-gold px-3 py-2 text-sm font-medium transition whitespace-nowrap">会社情報</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#profile" class="text-gray-700 hover:text-gold px-3 py-2 text-sm font-medium transition whitespace-nowrap">代表者紹介</a>
+                </nav>
+
+                <!-- CTAボタン (緑色) -->
+                <div class="hidden md:flex items-center pr-4 lg:pr-0">
+                    <a href="#contact" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-full font-bold shadow-lg transform transition hover:scale-105 flex items-center tracking-wide whitespace-nowrap">
+                        お問い合わせ <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+
+                <!-- スマホ用メニューボタン (右端に密着するネイビーの四角) -->
+                <div class="md:hidden flex items-center h-20 flex-shrink-0">
+                    <button id="mobile-menu-open" class="bg-navy text-white w-16 md:w-20 h-full flex flex-col justify-center items-center gap-1.5 md:gap-2 focus:outline-none transition-colors hover:bg-blue-900">
+                        <span class="block w-6 md:w-8 h-[2px] bg-white"></span>
+                        <span class="block w-6 md:w-8 h-[2px] bg-white"></span>
+                        <span class="block w-6 md:w-8 h-[2px] bg-white"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- スマホ用フルスクリーンメニュー (オーバーレイ) -->
+        <div id="mobile-menu" class="fixed inset-0 bg-navy z-[100] hidden flex-col items-center justify-center transition-opacity duration-300 opacity-0">
+            <!-- 閉じるボタン -->
+            <button id="mobile-menu-close" class="absolute top-6 right-6 w-12 h-12 flex justify-center items-center focus:outline-none hover:opacity-70 transition-opacity">
+                <div class="relative w-8 h-8">
+                    <span class="absolute top-1/2 left-0 block w-8 h-[2px] bg-white rotate-45"></span>
+                    <span class="absolute top-1/2 left-0 block w-8 h-[2px] bg-white -rotate-45"></span>
+                </div>
+            </button>
+
+            <div class="flex flex-col items-center space-y-10 w-full px-6">
+                <a href="#service" class="text-white text-2xl font-bold font-serif tracking-widest hover:text-gold transition-colors">事業内容</a>
+                <a href="#company" class="text-white text-2xl font-bold font-serif tracking-widest hover:text-gold transition-colors">会社情報</a>
+                <a href="#profile" class="text-white text-2xl font-bold font-serif tracking-widest hover:text-gold transition-colors">代表者紹介</a>
+                
+                <div class="pt-8 w-full max-w-sm">
+                    <a href="#contact" class="flex justify-center items-center w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-full font-bold shadow-md border-2 border-white text-xl tracking-widest hover:from-green-600 hover:to-green-700 transition-all">
+                        お問い合わせ <i class="fas fa-chevron-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション (参考画像1のテイスト) -->
+    <section class="relative bg-dark text-white pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden min-h-[80vh] flex items-center">
+        <!-- 背景画像 (プレースホルダー) -->
+        <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center mix-blend-luminosity"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-row-reverse justify-center items-center gap-6 md:gap-16 fade-in-up">
+            <!-- 縦書きキャッチコピー -->
+            <div class="vertical-text text-3xl md:text-5xl lg:text-6xl font-bold leading-loose tracking-widest">
+                <p class="ml-4 md:ml-8">この激動の時代</p>
+                <p class="ml-4 md:ml-8">戦略なき経営に</p>
+                <p>未来はない</p>
+            </div>
+            <div class="vertical-text text-xl md:text-2xl text-gold font-bold tracking-widest mt-16 md:mt-32">
+                <p>今こそ頼れる参謀を</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. セクション構成 -->
+    <!-- 事業内容 (Service) -->
+    <section id="service" class="py-24 bg-white scroll-mt-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-up">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 inline-block relative pb-4 font-serif">
+                    事業内容
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gold"></span>
+                </h2>
+                <p class="mt-4 text-gray-500 tracking-widest text-sm uppercase">Service</p>
+            </div>
+            
+            <div class="flex flex-col gap-24">
+                <!-- サービス1 -->
+                <div class="flex flex-col md:flex-row items-center relative">
+                    <div class="w-full md:w-6/12 bg-gray-50 p-10 md:p-16 rounded-sm border border-gray-100 shadow-lg relative z-10 md:translate-x-12">
+                        <div class="text-gold text-5xl mb-6 opacity-80"><i class="fa-solid fa-chess-knight"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 font-serif">経営参謀・顧問サービス</h3>
+                        <p class="text-gray-700 leading-loose text-justify">
+                            経営者の右腕として、企業の成長戦略の立案から実行支援まで伴走いたします。財務分析、組織構築、新規事業立ち上げなど、経営課題に対して多角的な視点から最適なソリューションを提供し、孤独な経営者を力強くサポートします。
+                        </p>
+                    </div>
+                    <div class="w-full md:w-7/12 relative z-0 mt-8 md:mt-0">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="経営参謀" class="w-full h-[300px] md:h-[450px] object-cover shadow-md">
+                    </div>
+                </div>
+
+                <!-- サービス2 -->
+                <div class="flex flex-col md:flex-row-reverse items-center relative">
+                    <div class="w-full md:w-6/12 bg-dark text-white p-10 md:p-16 rounded-sm shadow-lg relative z-10 md:-translate-x-12">
+                        <div class="text-gold text-5xl mb-6 opacity-80"><i class="fa-solid fa-bullhorn"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-6 font-serif">Webマーケティング支援</h3>
+                        <p class="text-gray-300 leading-loose text-justify">
+                            デジタル時代における最適な顧客接点の創出を支援します。SNS運用（YouTube、TikTok、Instagram等）の戦略策定から動画制作、広告運用まで、目的に応じた施策を実行し、企業の認知拡大と売上向上に直結する仕組みを構築します。
+                        </p>
+                    </div>
+                    <div class="w-full md:w-7/12 relative z-0 mt-8 md:mt-0">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Webマーケティング" class="w-full h-[300px] md:h-[450px] object-cover shadow-md">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 会社情報 (Company) -->
+    <section id="company" class="py-24 bg-gray-100 scroll-mt-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-up">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 inline-block relative pb-4">
+                    会社情報
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gold"></span>
+                </h2>
+                <p class="mt-4 text-gray-500 font-sans tracking-widest text-sm uppercase">Company</p>
+            </div>
+
+            <div class="bg-white shadow-md overflow-hidden border-t-4 border-gold">
+                <table class="w-full text-left border-collapse">
+                    <tbody>
+                        <tr class="border-b border-gray-100">
+                            <th class="py-5 px-6 md:px-10 bg-gray-50 font-bold text-gray-900 w-1/3 md:w-1/4">会社名</th>
+                            <td class="py-5 px-6 md:px-10 text-gray-700">カナメ株式会社</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <th class="py-5 px-6 md:px-10 bg-gray-50 font-bold text-gray-900">設立</th>
+                            <td class="py-5 px-6 md:px-10 text-gray-700">202X年X月X日</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <th class="py-5 px-6 md:px-10 bg-gray-50 font-bold text-gray-900">代表取締役</th>
+                            <td class="py-5 px-6 md:px-10 text-gray-700">山田 太郎</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <th class="py-5 px-6 md:px-10 bg-gray-50 font-bold text-gray-900">所在地</th>
+                            <td class="py-5 px-6 md:px-10 text-gray-700">
+                                〒000-0000<br>
+                                東京都〇〇区〇〇 1-2-3 〇〇ビル 4F
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="py-5 px-6 md:px-10 bg-gray-50 font-bold text-gray-900">事業内容</th>
+                            <td class="py-5 px-6 md:px-10 text-gray-700 leading-relaxed">
+                                ・経営コンサルティング事業<br>
+                                ・SNS・動画マーケティング支援事業<br>
+                                ・個人・法人向け動画編集・運用代行サービス
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 代表者紹介 (Profile) -->
+    <section id="profile" class="py-24 bg-white scroll-mt-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-up">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 inline-block relative pb-4">
+                    代表者紹介
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gold"></span>
+                </h2>
+                <p class="mt-4 text-gray-500 font-sans tracking-widest text-sm uppercase">Profile</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
+                <!-- 写真プレースホルダー -->
+                <div class="w-full md:w-2/5">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gold transform translate-x-4 translate-y-4 -z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="代表者" class="w-full h-auto shadow-lg object-cover aspect-[3/4]">
+                    </div>
+                </div>
+                
+                <!-- 経歴テキスト -->
+                <div class="w-full md:w-3/5 pt-4 md:pt-0">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">代表取締役　山田 太郎</h3>
+                    <p class="text-gold font-sans tracking-widest mb-8">Taro Yamada</p>
+                    
+                    <div class="space-y-6 text-gray-700 leading-loose text-justify">
+                        <p>
+                            大学卒業後、大手コンサルティングファームに入社。数多くの企業の経営再建や新規事業立ち上げに携わり、実践的な経営ノウハウを培う。
+                        </p>
+                        <p>
+                            その後、独立しカナメ株式会社を設立。「戦略なき経営に未来はない」という信念のもと、中小企業の参謀として伴走型の支援を行っている。机上の空論ではなく、現場に即した泥臭い実行支援が強み。
+                        </p>
+                        <p>
+                            現在は、YouTubeやTikTok等のSNSでの情報発信を軸に、自らの経験をコンテンツ化し、動画制作・SNS運用の支援事業も展開。法人としての信頼性と発信力を活かした新たな価値創造に取り組んでいる。
+                        </p>
+                    </div>
+
+                    <!-- 公式ロゴアイコン (参考画像2赤丸部分) -->
+                    <div class="mt-12 pt-8 border-t border-gray-200">
+                        <p class="text-center text-sm text-gray-500 mb-6 font-sans">＼ 公式SNSで情報発信中 ／</p>
+                        <div class="flex justify-center items-center space-x-8">
+                            <a href="#" class="text-red-600 hover:opacity-70 transition transform hover:scale-110" aria-label="YouTube">
+                                <i class="fa-brands fa-youtube text-4xl md:text-5xl"></i>
+                            </a>
+                            <a href="#" class="text-black hover:opacity-70 transition transform hover:scale-110" aria-label="X (Twitter)">
+                                <i class="fa-brands fa-x-twitter text-4xl md:text-5xl"></i>
+                            </a>
+                            <a href="#" class="hover:opacity-70 transition transform hover:scale-110" aria-label="Instagram">
+                                <i class="fa-brands fa-instagram text-4xl md:text-5xl text-instagram"></i>
+                            </a>
+                            <a href="#" class="text-black hover:opacity-70 transition transform hover:scale-110" aria-label="TikTok">
+                                <i class="fa-brands fa-tiktok text-4xl md:text-5xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. お問い合わせフォーム (Contact) -->
+    <section id="contact" class="py-24 bg-dark text-white scroll-mt-20 relative overflow-hidden">
+        <!-- 装飾 -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold via-yellow-200 to-gold"></div>
+        
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-up relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold inline-block relative pb-4">
+                    無料相談・お問い合わせ
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gold"></span>
+                </h2>
+                <p class="mt-4 text-gray-400 font-sans tracking-widest text-sm uppercase">Contact</p>
+                <p class="mt-8 text-gray-300 leading-relaxed">
+                    経営に関するお悩みや、サービスに関するご質問など、<br class="hidden md:block">
+                    まずはお気軽にご相談ください。<br>
+                    担当者より通常2営業日以内にご返信いたします。
+                </p>
+            </div>
+
+            <!-- Static Forms 実装 -->
+            <div class="bg-white rounded-sm shadow-2xl p-8 md:p-12 text-gray-800 font-sans">
+                <form action="https://api.staticforms.xyz/submit" method="POST" class="space-y-6">
+                    <!-- 隠しフィールド -->
+                    <!-- ※実際の運用時は accessKey に Static Forms で取得したキーを設定してください -->
+                    <input type="hidden" name="accessKey" value="sf_b5252a37f4608b5e6091a891"> 
+                    <input type="hidden" name="replyTo" value="@">
+                    <!-- ※実際の運用時は redirectTo に送信完了ページのURLを設定してください -->
+                    <input type="hidden" name="redirectTo" value="https://example.com/thanks">
+
+                    <!-- 入力項目 -->
+                    <div>
+                        <label for="company" class="block text-sm font-bold text-gray-700 mb-2">会社名 <span class="text-red-500 ml-1 text-xs font-normal bg-red-100 px-2 py-1 rounded">必須</span></label>
+                        <input type="text" id="company" name="$company" placeholder="株式会社〇〇" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="name" class="block text-sm font-bold text-gray-700 mb-2">担当者名 <span class="text-red-500 ml-1 text-xs font-normal bg-red-100 px-2 py-1 rounded">必須</span></label>
+                        <input type="text" id="name" name="name" placeholder="山田 太郎" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="website" class="block text-sm font-bold text-gray-700 mb-2">HPアドレス</label>
+                        <input type="url" id="website" name="$website" placeholder="https://example.com" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-bold text-gray-700 mb-2">メールアドレス <span class="text-red-500 ml-1 text-xs font-normal bg-red-100 px-2 py-1 rounded">必須</span></label>
+                        <input type="email" id="email" name="email" placeholder="example@company.com" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-bold text-gray-700 mb-2">電話番号 <span class="text-red-500 ml-1 text-xs font-normal bg-red-100 px-2 py-1 rounded">必須</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="03-1234-5678" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-bold text-gray-700 mb-2">相談内容(具体的にご記載ください) <span class="text-red-500 ml-1 text-xs font-normal bg-red-100 px-2 py-1 rounded">必須</span></label>
+                        <textarea id="message" name="message" rows="6" placeholder="現在の経営課題やご相談内容をご記入ください。" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition resize-y"></textarea>
+                    </div>
+
+                    <div class="text-center pt-6">
+                        <button type="submit" class="w-full md:w-2/3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-full font-bold shadow-lg transform transition hover:scale-105 text-lg flex justify-center items-center mx-auto tracking-widest">
+                            入力内容を送信する <i class="fas fa-paper-plane ml-3"></i>
+                        </button>
+                        <p class="text-xs text-gray-400 mt-4">※送信ボタンを押すと、そのまま送信されます。</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-black text-gray-400 py-10 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-xl font-bold text-white tracking-wider">
+                <span class="text-blue-500 mr-2"><i class="fa-solid fa-chart-line"></i></span>
+                カナメ株式会社
+            </div>
+            <p class="text-sm font-sans">&copy; 202X Kaname Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 4. JavaScript (アニメーション・UI制御) -->
+    <script>
+        // スマホメニューの開閉制御
+        const openBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        const menu = document.getElementById('mobile-menu');
+
+        function openMenu() {
+            menu.classList.remove('hidden');
+            menu.classList.add('flex');
+            // 少し遅らせてopacityを変更（フェードイン効果）
+            setTimeout(() => {
+                menu.classList.remove('opacity-0');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // 背景スクロール防止
+        }
+
+        function closeMenu() {
+            menu.classList.add('opacity-0');
+            // フェードアウト後にhiddenを追加
+            setTimeout(() => {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+                document.body.style.overflow = ''; // スクロール再開
+            }, 300);
+        }
+
+        openBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+
+        // スマホメニュー内のリンククリック時にメニューを閉じる
+        const menuLinks = menu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // ヘッダーのスクロール時のスタイル変更
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-0');
+                header.classList.remove('py-2');
+            } else {
+                header.classList.add('py-2');
+                header.classList.remove('py-0');
+            }
+        });
+
+        // スクロールアニメーション (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // 要素が15%見えたら発火
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // 一度発火したら監視を解除
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
