@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送信完了 | カナメ株式会社</title>
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind カスタム設定 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    },
+                    colors: {
+                        gold: '#d4af37',
+                        dark: '#111111',
+                        navy: '#002b5c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-feature-settings: "palt";
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-serif text-gray-800 flex flex-col min-h-screen">
+
+    <!-- ヘッダー (簡易版) -->
+    <header class="bg-white shadow-sm py-4">
+        <div class="max-w-7xl mx-auto px-4 flex justify-center">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-gray-900 tracking-widest">
+                <span class="text-blue-900 text-2xl"><i class="fa-solid fa-chart-line"></i></span>
+                カナメ株式会社
+            </a>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="max-w-xl w-full bg-white shadow-xl rounded-sm p-8 md:p-12 text-center border-t-4 border-gold">
+            <div class="text-green-500 mb-6">
+                <i class="fa-regular fa-circle-check text-6xl"></i>
+            </div>
+            
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 tracking-wide">
+                お問い合わせ<br class="sm:hidden">ありがとうございます
+            </h1>
+            
+            <div class="w-16 h-1 bg-gold mx-auto mb-8"></div>
+            
+            <p class="text-gray-600 mb-10 leading-loose font-sans text-sm md:text-base">
+                内容を確認の上、担当者より折り返しご連絡させていただきます。<br class="hidden md:block">
+                今しばらくお待ちください。
+            </p>
+            
+            <a href="index.html" class="inline-block w-full sm:w-auto bg-navy hover:bg-blue-900 text-white font-bold py-4 px-10 rounded-full transition transform hover:scale-105 shadow-md font-sans tracking-widest">
+                トップページへ戻る
+            </a>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-black text-gray-400 py-8 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm font-sans">&copy; 202X Kaname Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
